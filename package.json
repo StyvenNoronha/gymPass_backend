@@ -1,0 +1,33 @@
+{
+  "name": "gympass",
+  "version": "1.0.0",
+  "description": "GymPass style app.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build":"tsup src --out-dir build",
+    "start":"node build/server.js" 
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StyvenNoronha/gymPass_backend.git"
+  },
+  "keywords": [],
+  "author": "Styven cesar noronha",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/StyvenNoronha/gymPass_backend/issues"
+  },
+  "homepage": "https://github.com/StyvenNoronha/gymPass_backend#readme",
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fastify": "^5.2.2"
+  }
+}
