@@ -5,6 +5,7 @@
       "ES2023"
     ],
     "module": "Node16",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
