@@ -17,7 +17,7 @@
   "keywords": [],
   "author": "Styven cesar noronha",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/StyvenNoronha/gymPass_backend/issues"
   },
