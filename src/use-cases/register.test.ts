@@ -1,15 +1,19 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { RegisterUseCase } from './register.js'
 import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository.js'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error.js'
 
-describe('register use case', () => {
-  it('should hash user password upon registration', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
+let usersRepository: InMemoryUsersRepository
+let sut: RegisterUseCase
 
-    const { user } = await registerUseCase.execute({
+describe('register use case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new RegisterUseCase(usersRepository)
+  })
+  it('should hash user password upon registration', async () => {
+    const { user } = await sut.execute({
       nome: 'john doe',
       email: 'johnDoe@example.com',
       password: 'batata123',
@@ -24,19 +28,16 @@ describe('register use case', () => {
   })
 
   it('should not be able to register with same email twice', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
-
     const email = 'johnDoe@example.com'
 
-    registerUseCase.execute({
+    sut.execute({
       nome: 'john doe',
       email,
       password: 'batata123',
     })
 
     await expect(() =>
-      registerUseCase.execute({
+      sut.execute({
         nome: 'john doe',
         email,
         password: 'batata123',
@@ -45,10 +46,7 @@ describe('register use case', () => {
   })
 
   it('should  be able to register', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
-
-    const { user } = await registerUseCase.execute({
+    const { user } = await sut.execute({
       nome: 'john doe',
       email: 'johnDoe@example.com',
       password: 'batata123',
